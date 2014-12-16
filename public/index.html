@@ -1,0 +1,139 @@
+<!-- index.html -->
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="BasicAngularJS">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+    <title>Node/Angular Todo App</title>
+
+    <!-- SCROLLS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+    <style>
+        html                    { overflow-y:scroll; }
+        body                    { padding-top:50px; }
+        #todo-list              { margin-bottom:30px; }
+    </style>
+
+    <!-- SPELLS -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+    <script src="core.js"></script>
+
+</head>
+<!-- SET THE CONTROLLER AND GET ALL TODOS -->
+<div>
+
+  <!-- Tests sur les Scopes -->
+  <div ng-controller="MainCtrl">
+    {{ text }}
+  </div>
+    
+  <!-- Tests sur les Directives -->
+  <div ng-controller="UserCtrl">
+    <p class="username">Welcome, {{ user.details.username }}</p>
+    <p class="id">User ID: {{ user.details.id }}</p>
+  </div>
+  <div>
+    <!-- 1: déclaration en tant qu'attribut -->
+    <a custom-button>Click me</a>
+
+    <!-- 2: en tant que nouvel élément -->
+    <custom-button>Click me</custom-button>
+
+    <!-- 3: en tant que classe (pour être compatible avec les vieux IE) -->
+    <a class="custom-button">Click me</a>
+
+    <!-- 4: en tant que commentaire (peu adapté à cette démo) -->
+    <!-- directive: custom-button -->    
+  </div>
+  
+  <!-- Tests sur les Services, injection de dépendances -->
+  <div ng-controller="MathCtrl">
+    {{ result }}
+    
+  </div>
+  
+  <!-- Tests sur les Factories -->
+  <div ng-controller="ServerCtrl">
+    {{ serveur.get }}    
+  </div>
+    
+  <!-- Tests sur les filtres -->
+  <div ng-controller="FiltreCtrl">
+    <p>Sans filtre: {{ greeting }}</p>
+    <p>Reverse: {{ greeting | reverse }}</p>
+
+    <ul>
+      <li ng-repeat="number in myNumbers |filter:oddNumbers">{{ number }}</li>
+    </ul>
+
+    <ul>
+      <li ng-repeat="number in myNumbers |filter:greaterThanNum">{{ number }}</li>
+    </ul>        
+  </div>
+    
+  <!-- Binging Simple via ng-model -->
+  <div ng-controller="BindingCtrl">
+    <input type="text" ng-model="myModel" placeholder="Start typing..." />
+    <p>My model data: {{ myModel }}</p>
+  </div>
+    
+    
+  <!-- Binging XHR -->
+  <div ng-controller="XHRCtrl">
+    <p>{{ user.username }}</p>
+  </div>    
+    
+  <!-- Binging Declaratif -->  
+  <div ng-controller="EmailsCtrl">
+    <ul>
+      <li ng-repeat="message in emails.messages">
+        <p>From: {{ message.from }}</p>
+        <p>Subject: {{ message.subject }}</p>
+        <p>{{ message.sent | date:'MMM d, y h:mm:ss a' }}</p>
+        <a ng-click="deleteEmail($index)">Delete me</a>
+      </li>
+    </ul>    
+  </div> 
+    
+  <!-- Methodes de DOM : Model View ViewModel -->  
+  <a href="" ng-click="toggle = !toggle">Afficher menu</a>
+  <ul ng-show="toggle">
+    <li>Lien 1</li>
+    <li>Lien 2</li>
+    <li>Lien 3</li>
+  </ul>
+    
+  <!-- Les expressions -->  
+  <div ng-controller="ExpressionsCtrl">    
+        <p>Test 1: {{ main.test1.length > 0 && 'My data' || 'No data' }}</p>
+        <p>Test 2: {{ main.test2.length > 0 && 'My data' || 'No data' }}</p>
+  </div> 
+    
+  <!-- Tests sur les données statiques --> 
+  <div ng-controller="EmailsStatiquesCtrl">
+    <ul>
+      <li ng-repeat="message in emails.messages">
+        <p>From: {{ message.from }}</p>
+        <p>Subject: {{ message.subject }}</p>
+        <p>{{ message.sent | date:'MMM d, y h:mm:ss a' }}</p>
+        <a ng-click="deleteEmail($index)">Delete me</a>
+      </li>
+    </ul>       
+  </div>
+    
+</div>    
+    
+</body>
+<!-- dans index.html (en bas de page) -->
+<script>
+window.globalData = {};
+//globalData.emails = <baliseJavaPourGenererLesMessages>;
+globalData.emails = [{"from": "Steve Jobs","subject": "I think I'm holding my phone wrong :/","sent": "2013-10-01T08:05:59Z"}];
+</script>
+</html>
+    
